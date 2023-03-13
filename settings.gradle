@@ -1,0 +1,9 @@
+include ':librarytest'
+include ':net'
+include ':simpledemo'
+include ':common'
+include ':custom_view'
+include ':Arouter'
+include ':app'
+include ':plugin'
+rootProject.name = "Android-Technology"

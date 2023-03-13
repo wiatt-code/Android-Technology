@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:orientation="horizontal"
+    android:background="#E0E0E0">
+
+    <LinearLayout
+        android:id="@+id/tag_group"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/tag_group_draw"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:background="@drawable/ic_launcher_background"
+            android:backgroundTint="@color/black"/>
+
+        <TextView
+            android:layout_width="32dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="分组"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/tag_email"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/tag_email_draw"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:gravity="center"
+            android:background="@drawable/abc_vector_test"
+            android:backgroundTint="@color/black" />
+        <TextView
+            android:id="@+id/tag_email_content"
+            android:layout_width="32dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="邮件"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/tag_car"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/tag_car_draw"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:gravity="center"
+            android:background="@drawable/ic_launcher_foreground"
+            android:backgroundTint="@color/black" />
+        <TextView
+            android:id="@+id/tag_car_content"
+            android:layout_width="32dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="汽车"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/tag_bike"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/tag_bike_draw"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:gravity="center"
+            android:background="@drawable/ic_launcher_background"
+            android:backgroundTint="@color/black" />
+        <TextView
+            android:id="@+id/tag_bike_content"
+            android:layout_width="32dp"
+            android:layout_height="wrap_content"
+            android:text="电车"/>
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">custom_View</string>
+
+    <string name="red">red</string>
+    <string name="orange">orange</string>
+    <string name="yellow">yellow</string>
+    <string name="green">green</string>
+    <string name="blue">blue</string>
+    <string name="indigo">indigo</string>
+    <string name="purple">purple</string>
+    <string name="gray">gray</string>
+
+</resources>

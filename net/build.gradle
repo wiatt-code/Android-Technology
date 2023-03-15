@@ -44,9 +44,13 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.10.1'
 
     //Retrofit
-    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    api 'com.squareup.retrofit2:retrofit:2.9.0'
     //Gson converter
     implementation 'com.squareup.retrofit2:converter-gson:2.6.2'
+    // xml converter
+    implementation 'com.squareup.retrofit2:converter-simplexml:2.6.2'
+    implementation 'com.squareup.retrofit2:converter-jaxb:2.6.2'
+
     // log日志拦截器
     implementation 'com.squareup.okhttp3:logging-interceptor:4.2.1'
     // rxjava网络适配器

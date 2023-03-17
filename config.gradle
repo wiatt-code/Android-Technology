@@ -16,9 +16,9 @@ ext {
     // 所有模块的 Id
     appId = [
             app     : "com.wiatt.manuscript",
-            plugin   : "com.wiatt.plugin",
+            audioVideo   : "com.wiatt.AudioVideo",
             customView: "com.wiatt.custom_view",
-            libraryTest: "com.wiatt.librarytest",
+            dataTest: "com.wiatt.datatest",
             simpledemo : "com.wiatt.simpledemo"
     ]
 

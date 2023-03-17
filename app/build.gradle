@@ -46,10 +46,9 @@ dependencies {
     implementation project(path: ':Arouter')
     // 集成化模式，要发布版本时，子模块就都不能独立运行了
     if (isRelease) {
-        implementation project(":plugin")
+        implementation project(":AudioVideo")
         implementation project(":custom_view")
-        implementation project(path: ':simpledemo')
-        implementation project(path: ':librarytest')
+        implementation project(path: ':dataTest')
     }
     support.each { k, v -> implementation v }
     kapt 'com.alibaba:arouter-compiler:1.5.2'

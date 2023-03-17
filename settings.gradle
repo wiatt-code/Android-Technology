@@ -1,9 +1,9 @@
-include ':librarytest'
+include ':dataTest'
 include ':net'
 include ':simpledemo'
 include ':common'
 include ':custom_view'
 include ':Arouter'
 include ':app'
-include ':plugin'
+include ':AudioVideo'
 rootProject.name = "Android-Technology"

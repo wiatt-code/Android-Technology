@@ -16,4 +16,9 @@
     <color name="indigo">#4B0082</color>
     <color name="purple">#800080</color>
     <color name="gray">#808080</color>
+
+    <color name="DarkSalmon">#E9967A</color>
+    <color name="GoldEnrod">#DAA520</color>
+    <color name="PeachPuff">#FFDAB9</color>
+    <color name="Tomato">#FF6347</color>
 </resources>

@@ -10,8 +10,8 @@ import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.wiatt.custom_view.CustomViewFragment
-import com.wiatt.librarytest.LibTestFragment
-import com.wiatt.plugin.AudioVideoFragment
+import com.wiatt.dataTest.LibTestFragment
+import com.wiatt.audioVideo.AudioVideoFragment
 
 class MainActivity : AppCompatActivity() {
 

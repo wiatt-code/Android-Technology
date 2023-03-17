@@ -13,4 +13,12 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="MyTabLayout" parent="Widget.Design.TabLayout">
+        <!-- 设置文字下面的横线的高度，设置为 0dp 表示不显示，不设置会在下方显示一条横线，可以删除看看效果 -->
+        <item name="tabIndicatorHeight">0dp</item>
+        <!--去掉水波纹-->
+        <item name="tabBackground">@color/white</item>
+        <item name="tabRippleColor">@color/white</item>
+    </style>
 </resources>

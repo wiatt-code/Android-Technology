@@ -12,6 +12,7 @@
         <activity android:name=".myViewPager2.ViewPager2Activity"/>
         <activity android:name=".myListView.ListViewActivity" />
         <activity android:name=".myRecycleView.RecycleViewActivity" />
+        <activity android:name=".myFragment.FragmentDemoActivity"/>
         <activity android:name=".MainActivity" />
     </application>
 

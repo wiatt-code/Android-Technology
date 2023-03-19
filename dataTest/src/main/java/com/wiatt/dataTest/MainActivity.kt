@@ -1,42 +1,51 @@
 package com.wiatt.dataTest
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.FrameLayout
 import android.widget.TextView
+import androidx.fragment.app.Fragment
 import com.alibaba.android.arouter.facade.annotation.Route
+import com.wiatt.dataTest.DataTest.DataTestFragment
 import com.wiatt.dataTest.data.Repo
 import com.wiatt.dataTest.data.TestApi
+import com.wiatt.dataTest.base.BaseActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 @Route(path = "/dataTest/MainActivity")
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
 
-    private lateinit var tvResult: TextView
+    private var currentFragment: Fragment? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        tvResult = findViewById(R.id.tvResult)
+        switchFragment(DataTestFragment.newInstance())
     }
 
-    fun getInfo(view: View) {
-        TestApi().getRepos("octocat").enqueue(object : Callback<List<Repo>> {
-            override fun onResponse(call: Call<List<Repo>>, response: Response<List<Repo>>) {
-                println("请求成功")
-                val repoStr = response.body()?.get(0)?.toString()
+    /**
+     * 用于切换Fragment
+     * 当不显示fragment时，nextFragment为空
+     */
+    fun switchFragment(nextFragment: Fragment?) {
+        if(nextFragment == currentFragment) {
+            return
+        }
 
-                runOnUiThread {
-                    tvResult.text = "请求成功，repo = $repoStr"
-                }
-            }
+        if (currentFragment != null && currentFragment!!.isAdded) {
+            hideFragment(currentFragment!!)
+        }
 
-            override fun onFailure(call: Call<List<Repo>>, t: Throwable) {
-                println("请求失败")
+        if (nextFragment != null) {
+            if (nextFragment.isAdded) {
+                showFragment(nextFragment)
+            } else {
+                addFragment(nextFragment, R.id.llContainer)
             }
-        })
+        }
+        currentFragment = nextFragment
     }
 }
 

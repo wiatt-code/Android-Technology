@@ -7,11 +7,9 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
+import com.alibaba.android.arouter.launcher.ARouter
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
-import com.wiatt.custom_view.CustomViewFragment
-import com.wiatt.dataTest.LibTestFragment
-import com.wiatt.audioVideo.AudioVideoFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -31,15 +29,28 @@ class MainActivity : AppCompatActivity() {
         }.attach()
     }
     private fun initData() {
-        modules.add(ModuleInfo("view",
-            this.getDrawable(R.drawable.selector_tab_home)!!,
-            CustomViewFragment.newInstance()))
-        modules.add(ModuleInfo("data",
-            this.getDrawable(R.drawable.selector_tab_home)!!,
-            LibTestFragment.newInstance()))
-        modules.add(ModuleInfo("video",
-            this.getDrawable(R.drawable.selector_tab_home)!!,
-            AudioVideoFragment.newInstance()))
+        val fragment =
+        modules.add(
+            ModuleInfo(
+                "view",
+                this.getDrawable(R.drawable.selector_tab_home)!!,
+                ARouter.getInstance().build("/customView/CustomViewFragment").navigation() as Fragment
+            )
+        )
+        modules.add(
+            ModuleInfo(
+                "data",
+                this.getDrawable(R.drawable.selector_tab_home)!!,
+                ARouter.getInstance().build("/dataTest/DataTestFragment").navigation() as Fragment
+            )
+        )
+        modules.add(
+            ModuleInfo(
+                "video",
+                this.getDrawable(R.drawable.selector_tab_home)!!,
+                ARouter.getInstance().build("/audioVideo/AudioVideoFragment").navigation() as Fragment
+            )
+        )
     }
 
     private fun initTab(tab: TabLayout.Tab, module: ModuleInfo) {
@@ -56,7 +67,11 @@ class MainActivity : AppCompatActivity() {
         for (module in modules) {
             fragments.add(module.fragment)
         }
-        val myFragmentPageAdapter = MyFragmentPageAdapter(supportFragmentManager, lifecycle, fragments)
+        val myFragmentPageAdapter = MyFragmentPageAdapter(
+            supportFragmentManager,
+            lifecycle,
+            fragments
+        )
         vpContent.adapter = myFragmentPageAdapter
     }
 }

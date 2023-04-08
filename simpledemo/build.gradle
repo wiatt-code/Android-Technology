@@ -2,10 +2,12 @@ if(isRelease) {
     apply plugin: 'com.android.library'
     apply plugin: 'kotlin-android'
     apply plugin: 'kotlin-kapt'
+    apply plugin: 'org.greenrobot.greendao'
 } else {
     apply plugin: 'com.android.application'
     apply plugin: 'kotlin-android'
     apply plugin: 'kotlin-kapt'
+    apply plugin: 'org.greenrobot.greendao'
 }
 
 def androidId = rootProject.ext.androidId
@@ -65,11 +67,21 @@ kapt {
     }
 }
 
+greendao {
+    schemaVersion 1 //数据库版本号
+    daoPackage 'com.wiatt.simpledemo.myGreendao.dao'
+// 设置DaoMaster、DaoSession、Dao 包名
+    targetGenDir 'src/main/java'//设置DaoMaster、DaoSession、Dao目录,请注意，这里路径用/不要用.
+//    generateTests false //设置为true以自动生成单元测试。
+//    targetGenDirTests 'src/main/java' //应存储生成的单元测试的基本目录。默认为 src / androidTest / java。
+}
+
 dependencies {
 
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation project(path: ':Arouter')
     support.each { k, v -> implementation v }
+    implementation 'org.greenrobot:greendao:3.3.0'
 
     kapt 'com.alibaba:arouter-compiler:1.5.2'
 }

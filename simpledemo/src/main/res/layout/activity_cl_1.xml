@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".constraintLayoutDemo.ClActivity">
+
+    <ImageView
+        android:id="@+id/ivIc"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_margin="32dp"
+        android:src="@mipmap/ic_launcher" />
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/ivIc"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_margin="16dp"
+        android:text="中国电信" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tvTitle"
+        app:layout_constraintStart_toStartOf="@id/tvTitle"
+        android:layout_marginTop="20dp"
+        android:text="[浙江电信] 金秋福利，充值享套餐月费减免啦！"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/tvTitle"
+        android:layout_marginEnd="20dp"
+        android:text="周日 22:42"/>
+
+    <ImageView
+        android:id="@+id/ivIc2"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="200dp"
+        android:layout_marginStart="32dp"
+        android:src="@mipmap/ic_launcher"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="  关注  "
+        app:layout_constraintBottom_toBottomOf="@id/ivIc2"
+        app:layout_constraintTop_toTopOf="@id/ivIc2"
+        app:layout_constraintStart_toEndOf="@id/ivIc2"
+        android:layout_marginStart="200dp" />
+
+    <ImageView
+        android:id="@+id/ivIc3"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="350dp"
+        android:src="@mipmap/ic_launcher"/>
+
+    <Button
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        app:layout_constraintStart_toStartOf="@id/ivIc3"
+        app:layout_constraintEnd_toEndOf="@id/ivIc3"
+        app:layout_constraintTop_toBottomOf="@id/ivIc3"
+        app:layout_constraintBottom_toBottomOf="@id/ivIc3"/>
+
+    <View
+        android:id="@+id/vItem1"
+        android:layout_width="0dp"
+        android:layout_height="150dp"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/vItem2"
+        android:layout_marginTop="600dp"/>
+
+    <View
+        android:id="@+id/vItem2"
+        android:layout_width="0dp"
+        android:layout_height="150dp"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintTop_toTopOf="@id/vItem1"
+        app:layout_constraintStart_toEndOf="@id/vItem1"
+        app:layout_constraintEnd_toStartOf="@id/vItem3"/>
+
+    <View
+        android:id="@+id/vItem3"
+        android:layout_width="0dp"
+        android:layout_height="150dp"
+        app:layout_constraintHorizontal_weight="2"
+        app:layout_constraintTop_toTopOf="@id/vItem1"
+        app:layout_constraintStart_toEndOf="@id/vItem2"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:id="@+id/tvNum1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/tvNum2"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="800dp"
+        app:layout_constraintHorizontal_weight="1"
+        android:text="99"
+        android:textSize="128sp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/tvNum1"
+        app:layout_constraintBaseline_toBaselineOf="@id/tvNum1"
+        android:text="%"
+        android:textSize="16sp"/>
+
+    <TextView
+        android:id="@+id/tvNum2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/tvNum1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintHorizontal_weight="1"
+        android:layout_marginTop="800dp"
+        android:text="99"
+        android:textSize="128sp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/tvNum2"
+        app:layout_constraintBottom_toBottomOf="@id/tvNum2"
+        android:text="%"
+        android:textSize="16sp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

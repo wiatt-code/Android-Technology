@@ -11,6 +11,6 @@ class NetApplication: Application() {
     }
 
     companion object {
-        var mApplication: Application? = null
+        var mApplication: NetApplication? = null
     }
 }

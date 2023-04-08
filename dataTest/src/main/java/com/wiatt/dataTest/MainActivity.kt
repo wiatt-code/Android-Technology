@@ -18,11 +18,12 @@ import retrofit2.Response
 class MainActivity : BaseActivity() {
 
     private var currentFragment: Fragment? = null
+    private var dataTestFragment: DataTestFragment = DataTestFragment.newInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        switchFragment(DataTestFragment.newInstance())
+        switchFragment(dataTestFragment)
     }
 
     /**

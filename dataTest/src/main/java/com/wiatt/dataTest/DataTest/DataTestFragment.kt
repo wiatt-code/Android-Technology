@@ -5,23 +5,27 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.FrameLayout
 import android.widget.TextView
+import androidx.core.view.isInvisible
+import androidx.fragment.app.Fragment
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.wiatt.dataTest.R
 import com.wiatt.dataTest.base.BaseFragment
 import com.wiatt.common.mvp.BaseView
+import com.wiatt.dataTest.data.GithubMsg
 import com.wiatt.dataTest.data.Repo
-import com.wiatt.dataTest.data.TestApi
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 @Route(path = "/dataTest/DataTestFragment")
 class DataTestFragment : BaseFragment(), BaseView<DataTestFragment, DataTestPresenter, DataTestContract.IDtIView> {
 
     private lateinit var p: DataTestPresenter
-    private lateinit var tvResult: TextView
-    private lateinit var btnRequest: Button
+    private lateinit var tvRFNResult: TextView
+    private lateinit var btnRFN: Button
+    private lateinit var btnGFD: Button
+    private lateinit var tvGFDResult: TextView
+    private lateinit var flContainer: FrameLayout
+    private lateinit var fGFDMsg: GithubMsgFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,9 +35,22 @@ class DataTestFragment : BaseFragment(), BaseView<DataTestFragment, DataTestPres
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         var rootView = inflater.inflate(R.layout.fragment_data_test, container, false)
-        tvResult = rootView.findViewById(R.id.tvResult)
-        btnRequest = rootView.findViewById(R.id.btnRequest)
-        btnRequest.setOnClickListener { p.getContract().getRepoFromNet("octocat") }
+        btnRFN = rootView.findViewById(R.id.btnRFN)
+        tvRFNResult = rootView.findViewById(R.id.tvRFNResult)
+        btnGFD = rootView.findViewById(R.id.btnGFD)
+        tvGFDResult = rootView.findViewById(R.id.tvGFDResult)
+        flContainer = rootView.findViewById(R.id.flContainer)
+        fGFDMsg = GithubMsgFragment.newInstance()
+        childFragmentManager.beginTransaction().add(R.id.flContainer, fGFDMsg).commit()
+        childFragmentManager.beginTransaction().hide(fGFDMsg).commit()
+        tvGFDResult.visibility = View.GONE
+        btnRFN.setOnClickListener {
+            p.getContract().getGithubMsgFromNet("octocat")
+        }
+        btnGFD.setOnClickListener {
+            p.getContract().getRepoFromDatabase()
+        }
+
         return rootView
     }
 
@@ -58,13 +75,22 @@ class DataTestFragment : BaseFragment(), BaseView<DataTestFragment, DataTestPres
     }
 
     inner class DtView: DataTestContract.IDtIView {
-        override fun callBackRepoFromNet(reposData: String) {
+        override fun callBackGithubMsgFromNet(responseMsg: String) {
             this@DataTestFragment.activity?.runOnUiThread {
-                tvResult.text = "请求成功，repo = $reposData"
+                tvRFNResult.text = responseMsg
             }
         }
 
-        override fun callBackRepoFromDatabase(repos: List<Repo>) {
+        override fun callBackRepoFromDatabase(githubMsgs: MutableList<GithubMsg>) {
+            if (githubMsgs.isEmpty()) {
+                childFragmentManager.beginTransaction().hide(fGFDMsg).commit()
+                tvGFDResult.text = "github message get fail from database"
+                tvGFDResult.visibility = View.VISIBLE
+            } else {
+                tvGFDResult.visibility = View.GONE
+                fGFDMsg.update(githubMsgs)
+                childFragmentManager.beginTransaction().show(fGFDMsg).commit()
+            }
         }
 
         override fun callBackRepoFromFile(repos: List<Repo>) {

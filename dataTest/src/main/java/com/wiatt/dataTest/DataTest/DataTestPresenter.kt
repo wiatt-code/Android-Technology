@@ -1,6 +1,7 @@
 package com.wiatt.dataTest.DataTest
 
 import com.wiatt.common.mvp.BasePresenter
+import com.wiatt.dataTest.data.GithubMsg
 import com.wiatt.dataTest.data.Repo
 
 class DataTestPresenter:
@@ -15,8 +16,8 @@ class DataTestPresenter:
     }
 
     inner class DtPresenter: DataTestContract.IDtIPresenter {
-        override fun getRepoFromNet(userName: String) {
-            mModel.getContract().requestRepoFromNet(userName)
+        override fun getGithubMsgFromNet(userName: String) {
+            mModel.getContract().requestGithubMsgFromNet(userName)
         }
 
         override fun getRepoFromDatabase() {
@@ -27,12 +28,12 @@ class DataTestPresenter:
             mModel.getContract().requestRepoFromFile()
         }
 
-        override fun responseRepoFromNet(reposData: String) {
-            getView()?.getContract()?.callBackRepoFromNet(reposData)
+        override fun responseGithubMsgFromNet(responseMsg: String) {
+            getView()?.getContract()?.callBackGithubMsgFromNet(responseMsg)
         }
 
-        override fun responseRepoFromDataBase(repos: List<Repo>) {
-            getView()?.getContract()?.callBackRepoFromDatabase(repos)
+        override fun responseRepoFromDataBase(githubMsgs: MutableList<GithubMsg>) {
+            getView()?.getContract()?.callBackRepoFromDatabase(githubMsgs)
         }
 
         override fun responseRepoFromFile(repos: List<Repo>) {

@@ -14,6 +14,11 @@ interface TestService {
     @ResponseFormate("json")
     fun getRepos(@Path("user") user: String): Call<List<Repo>>
 
+    @GET("users/{user}")
+    @RequestFormate("json")
+    @ResponseFormate("json")
+    fun getOwner(@Path("user") user: String): Call<OwnerMain>
+
     /**
      * method 表示请求的方法，区分大小写
      * path表示路径

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="5dp">
+
+    <TextView
+        android:id="@+id/tvFullName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="full name："
+        android:textSize="15sp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.05"/>
+
+    <TextView
+        android:id="@+id/tvFullNameValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="xxxxx"
+        android:textSize="15sp"
+        app:layout_constraintTop_toTopOf="@id/tvFullName"
+        app:layout_constraintBottom_toBottomOf="@id/tvFullName"
+        app:layout_constraintStart_toEndOf="@id/tvFullName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.025"
+        app:layout_constrainedWidth="true"
+        app:layout_constrainedHeight="true"/>
+
+    <TextView
+        android:id="@+id/tvGitUrl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="git url："
+        android:textSize="15sp"
+        app:layout_constraintTop_toBottomOf="@id/tvFullNameValue"
+        app:layout_constraintStart_toStartOf="@id/tvFullName"
+        android:layout_marginTop="5dp"/>
+
+    <TextView
+        android:id="@+id/tvGitUrlVaule"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="http://www.baidu.com/123456"
+        android:textSize="15sp"
+        app:layout_constraintTop_toTopOf="@id/tvGitUrl"
+        app:layout_constraintStart_toEndOf="@id/tvGitUrl"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/tvGitUrl"
+        app:layout_constraintHorizontal_bias="0.025"
+        app:layout_constrainedWidth="true"
+        app:layout_constrainedHeight="true"/>
+
+    <TextView
+        android:id="@+id/tvSshUrl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ssh url："
+        android:textSize="15sp"
+        app:layout_constraintTop_toBottomOf="@id/tvGitUrlVaule"
+        app:layout_constraintStart_toStartOf="@id/tvGitUrl"
+        android:layout_marginTop="5dp"/>
+
+    <TextView
+        android:id="@+id/tvSshUrlVaule"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="http://www.baidu.com/123456sdfsdfsdfd"
+        android:textSize="15sp"
+        app:layout_constraintTop_toTopOf="@id/tvSshUrl"
+        app:layout_constraintStart_toEndOf="@id/tvSshUrl"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/tvSshUrl"
+        app:layout_constraintHorizontal_bias="0.025"
+        app:layout_constrainedWidth="true"
+        app:layout_constrainedHeight="true"/>
+
+    <TextView
+        android:id="@+id/tvCloneUrl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="clone url："
+        android:textSize="15sp"
+        app:layout_constraintTop_toBottomOf="@id/tvSshUrlVaule"
+        app:layout_constraintStart_toStartOf="@id/tvSshUrl"
+        android:layout_marginTop="5dp"/>
+
+    <TextView
+        android:id="@+id/tvCloneUrlVaule"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="http://www.baidu.com/123456"
+        android:textSize="15sp"
+        app:layout_constraintTop_toTopOf="@id/tvCloneUrl"
+        app:layout_constraintStart_toEndOf="@id/tvCloneUrl"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/tvCloneUrl"
+        app:layout_constraintHorizontal_bias="0.025"
+        app:layout_constrainedWidth="true"
+        app:layout_constrainedHeight="true"/>
+
+    <TextView
+        android:id="@+id/tvDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="description："
+        android:textSize="15sp"
+        app:layout_constraintTop_toBottomOf="@id/tvCloneUrlVaule"
+        app:layout_constraintStart_toStartOf="@id/tvCloneUrl"
+        android:layout_marginTop="5dp"/>
+
+    <TextView
+        android:id="@+id/tvDescriptionVaule"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="This repo is for demonstration purposes only."
+        android:textSize="15sp"
+        app:layout_constraintTop_toTopOf="@id/tvDescription"
+        app:layout_constraintStart_toEndOf="@id/tvDescription"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.025"
+        app:layout_constrainedWidth="true"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,6 +1,7 @@
 package com.wiatt.dataTest.DataTest
 
 import com.wiatt.common.mvp.BaseContract
+import com.wiatt.dataTest.data.GithubMsg
 import com.wiatt.dataTest.data.Repo
 
 interface DataTestContract: BaseContract {
@@ -8,7 +9,7 @@ interface DataTestContract: BaseContract {
         /**
          * 从网络请求repo数据
          */
-        fun requestRepoFromNet(userName: String)
+        fun requestGithubMsgFromNet(userName: String)
 
         /**
          * 从数据库获取repo数据
@@ -26,7 +27,7 @@ interface DataTestContract: BaseContract {
          * 从网络请求repo数据
          * 在View层调用
          */
-        fun getRepoFromNet(userName: String)
+        fun getGithubMsgFromNet(userName: String)
 
         /**
          * 从数据库获取repo数据
@@ -44,13 +45,13 @@ interface DataTestContract: BaseContract {
          * 来自网络的repo数据响应
          * 在model层调用
          */
-        fun responseRepoFromNet(reposData: String)
+        fun responseGithubMsgFromNet(responseMsg: String)
 
         /**
          * 来自数据库的repo数据响应
          * 在model层调用
          */
-        fun responseRepoFromDataBase(repos: List<Repo>)
+        fun responseRepoFromDataBase(githubMsgs: MutableList<GithubMsg>)
 
         /**
          * 来自文件的repo数据响应
@@ -64,12 +65,12 @@ interface DataTestContract: BaseContract {
         /**
          * 来自网络的repo数据响应
          */
-        fun callBackRepoFromNet(reposData: String)
+        fun callBackGithubMsgFromNet(responseMsg: String)
 
         /**
          * 来自数据库的repo数据响应
          */
-        fun callBackRepoFromDatabase(repos: List<Repo>)
+        fun callBackRepoFromDatabase(githubMsgs: MutableList<GithubMsg>)
 
         /**
          * 来自文件的repo数据响应

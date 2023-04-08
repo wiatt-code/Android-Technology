@@ -1,20 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".DataTest.DataTestFragment">
 
     <Button
-        android:id="@+id/btnRequest"
+        android:id="@+id/btnRFN"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="GetRepos"/>
+        android:text="在网络中请求github message"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="5dp"/>
 
     <TextView
-        android:id="@+id/tvResult"
+        android:id="@+id/tvRFNResult"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/btnRequest"/>
+        android:lines="1"
+        android:textSize="15sp"
+        app:layout_constraintTop_toBottomOf="@id/btnRFN"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"/>
 
-</RelativeLayout>
+    <Button
+        android:id="@+id/btnGFD"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="在数据库中获取github message"
+        app:layout_constraintTop_toBottomOf="@id/tvRFNResult"
+        app:layout_constraintStart_toStartOf="@id/btnRFN"
+        android:layout_marginTop="10dp"/>
+
+    <TextView
+        android:id="@+id/tvGFDResult"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        app:layout_constraintTop_toBottomOf="@id/btnGFD"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"/>
+
+    <FrameLayout
+        android:id="@+id/flContainer"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        app:layout_constraintTop_toBottomOf="@id/btnGFD"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

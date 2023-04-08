@@ -1,0 +1,55 @@
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+    id 'org.greenrobot.greendao'
+}
+
+def androidId = rootProject.ext.androidId
+
+android {
+    compileSdkVersion androidId.compileSdkVersion
+    buildToolsVersion androidId.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion androidId.minSdkVersion
+        targetSdkVersion androidId.targetSdkVersion
+
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+//    namespace 'com.wiatt.engine'
+}
+
+greendao {
+    schemaVersion 1   //数据库版本号
+    daoPackage 'com.wiatt.engine.database.greenDao.dao'  // DaoMaster、DaoSession、Dao 文件的具体目录
+    // 设置DaoMaster、DaoSession、Dao 包名
+    targetGenDir 'src/main/java'  //设置DaoMaster、DaoSession、Dao目录,请注意，这里路径用/不要用。
+    generateTests false //设置为true以自动生成单元测试。
+    targetGenDirTests 'src/main/java' //应存储生成的单元测试的基本目录。默认为 src / androidTest / java。
+}
+
+dependencies {
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    api project(path: ':common')
+    implementation 'androidx.core:core-ktx:1.2.0'
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    api 'com.alibaba:arouter-api:1.5.2'
+
+    // greenDao
+    implementation 'org.greenrobot:greendao:3.3.0'
+}

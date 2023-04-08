@@ -36,7 +36,7 @@ data class Repo(
     val has_pages: Boolean,
     val has_projects: Boolean,
     val has_wiki: Boolean,
-    val homepage: String,
+    val homepage: Any,
     val hooks_url: String,
     val html_url: String,
     val id: Int,
@@ -48,7 +48,7 @@ data class Repo(
     val labels_url: String,
     val language: Any,
     val languages_url: String,
-    val license: Any,
+    val license: License?,
     val merges_url: String,
     val milestones_url: String,
     val mirror_url: Any,
@@ -80,6 +80,14 @@ data class Repo(
     val watchers: Int,
     val watchers_count: Int,
     val web_commit_signoff_required: Boolean
+)
+
+data class License(
+    val key: String,
+    val name: String,
+    val node_id: String,
+    val spdx_id: String,
+    val url: String
 )
 
 data class Owner(

@@ -1,3 +1,4 @@
+include ':engine'
 include ':dataTest'
 include ':net'
 include ':simpledemo'

@@ -1,15 +1,14 @@
-package com.wiatt.simpledemo
+package com.wiatt.dataTest
 
 import com.wiatt.arouter.BaseApplication
 
-class SimpleDemoApplication: BaseApplication() {
-
+class DataTestApplication: BaseApplication() {
     override fun onCreate() {
         super.onCreate()
         mApplication = this
     }
 
     companion object {
-        var mApplication: SimpleDemoApplication? = null
+        var mApplication: DataTestApplication? = null
     }
 }

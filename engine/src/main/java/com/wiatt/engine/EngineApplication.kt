@@ -5,7 +5,7 @@ import android.database.sqlite.SQLiteDatabase
 import com.wiatt.engine.database.greenDao.dao.DaoMaster
 import com.wiatt.engine.database.greenDao.dao.DaoSession
 
-class EngineApplication: Application() {
+open class EngineApplication: Application() {
 
     var daoSession: DaoSession? = null
         private set

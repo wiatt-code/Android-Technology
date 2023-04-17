@@ -2,10 +2,11 @@ package com.wiatt.engine
 
 import android.app.Application
 import android.database.sqlite.SQLiteDatabase
+import com.wiatt.common.CommonApplication
 import com.wiatt.engine.database.greenDao.dao.DaoMaster
 import com.wiatt.engine.database.greenDao.dao.DaoSession
 
-class EngineApplication: Application() {
+open class EngineApplication: CommonApplication() {
 
     var daoSession: DaoSession? = null
         private set

@@ -14,16 +14,16 @@
         <activity android:name=".myRecycleView.RecycleViewActivity" />
         <activity android:name=".myViewPager2.ViewPager2Activity" />
         <activity android:name=".myFragment.FragmentDemoActivity" />
-        <activity android:name=".constraintLayoutDemo.ClActivity">
+        <activity android:name=".constraintLayoutDemo.ClActivity" />
+        <activity android:name=".eventBusDemo.EventBusOneActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity">
-
-        </activity>
+        <activity android:name=".eventBusDemo.EventBusTwoActivity" />
+        <activity android:name=".MainActivity" />
     </application>
 
 </manifest>

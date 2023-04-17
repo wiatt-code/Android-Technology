@@ -42,6 +42,9 @@ android {
 
     sourceSets {
         main {
+            assets {
+                srcDirs 'src\\main\\debug\\assets', 'src\\main\\assets'
+            }
             if (!isRelease) {
                 // 测试版本，组件化环境，让 /main/debug/ 下的 AndroidManifest 生效
                 manifest.srcFile 'src/main/debug/AndroidManifest.xml'

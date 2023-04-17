@@ -1,13 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".AudioVideoFragment">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="视频类Fragment" />
+    <Button
+        android:id="@+id/btnGoVideo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="go video page"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="5dp"/>
 
-</FrameLayout>
+    <Button
+        android:id="@+id/btnGoAudio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="go audio page"
+        app:layout_constraintStart_toStartOf="@id/btnGoVideo"
+        app:layout_constraintTop_toBottomOf="@id/btnGoVideo"
+        android:layout_marginTop="10dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

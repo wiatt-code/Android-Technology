@@ -2,7 +2,14 @@ package com.wiatt.audioVideo.player
 
 import android.content.Context
 import android.media.MediaPlayer
+import android.os.Build
 import android.view.SurfaceHolder
+import androidx.annotation.RequiresApi
+import com.wiatt.audioVideo.eventBusBean.EventPlayerError
+import com.wiatt.audioVideo.eventBusBean.EventPlayerState
+import com.wiatt.audioVideo.eventBusBean.EventPlayerVideoSize
+import com.wiatt.common.LogUtil
+import org.greenrobot.eventbus.EventBus
 import java.lang.Exception
 
 class AndroidMediaPlayer(override var context: Context):
@@ -31,8 +38,9 @@ class AndroidMediaPlayer(override var context: Context):
     }
 
     private fun setPlayerState(playerState: PlayerState) {
+        LogUtil.i(TAG, "oldPlayerState = $mPlayerState, newPlayerState = $playerState")
+        EventBus.getDefault().post(EventPlayerState(this, playerState, mPlayerState))
         mPlayerState = playerState
-        TODO("用接口或者消息传递机制传递信息")
     }
 
     private fun initListener() {
@@ -132,7 +140,7 @@ class AndroidMediaPlayer(override var context: Context):
     }
 
     override fun getDuration(): Int {
-        return if (mediaPlayer != null) {
+        return if (isInPlayState()) {
             mediaPlayer!!.duration / 1000
         } else {
             -1
@@ -157,24 +165,28 @@ class AndroidMediaPlayer(override var context: Context):
                     setPlayerState(PlayerState.IDLE)
                 }
             } catch (e: Exception) {
+                LogUtil.e(TAG, "dealWithReset Exception: e = ${e.message}")
                 e.printStackTrace()
                 reset()
-                TODO("用接口或者消息传递机制传递信息")
+                EventBus.getDefault().post(EventPlayerError(this, PlayerError.ERROR_RESET_CRASH))
             }
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.N)
     override fun dealWithSetDataSource(dataSource: String) {
         mediaPlayer?.let {
             try {
                 if (mPlayerState == PlayerState.IDLE) {
                     it.setDataSource(dataSource)
+//                    it.setDataSource(context.assets.openFd("video/big_buck_bunny.mp4"))
                     setPlayerState(PlayerState.INITIALIZED)
                 }
             } catch (e: Exception) {
+                LogUtil.e(TAG, "dealWithSetDataSource Exception: e = ${e.message}")
                 e.printStackTrace()
                 reset()
-                TODO("用接口或者消息传递机制传递信息")
+                EventBus.getDefault().post(EventPlayerError(this, PlayerError.ERROR_SET_SOURCE_CRASH))
             }
         }
     }
@@ -187,9 +199,10 @@ class AndroidMediaPlayer(override var context: Context):
                     // 不再这里修改状态，prepare操作完成会产生回调消息
                 }
             } catch (e: Exception) {
+                LogUtil.e(TAG, "dealWithPrepareAsync Exception: e = ${e.message}")
                 e.printStackTrace()
                 reset()
-                TODO("用接口或者消息传递机制传递信息")
+                EventBus.getDefault().post(EventPlayerError(this, PlayerError.ERROR_PREPARE_CRASH))
             }
         }
     }
@@ -205,9 +218,10 @@ class AndroidMediaPlayer(override var context: Context):
                     setPlayerState(PlayerState.PLAYING)
                 }
             } catch (e: Exception) {
+                LogUtil.e(TAG, "dealWithStart Exception: e = ${e.message}")
                 e.printStackTrace()
                 reset()
-                TODO("用接口或者消息传递机制传递信息")
+                EventBus.getDefault().post(EventPlayerError(this, PlayerError.ERROR_START_CRASH))
             }
         }
     }
@@ -220,9 +234,10 @@ class AndroidMediaPlayer(override var context: Context):
                     setPlayerState(PlayerState.PAUSED)
                 }
             } catch (e: Exception) {
+                LogUtil.e(TAG, "dealWithPause Exception: e = ${e.message}")
                 e.printStackTrace()
                 reset()
-                TODO("用接口或者消息传递机制传递信息")
+                EventBus.getDefault().post(EventPlayerError(this, PlayerError.ERROR_PAUSE_CRASH))
             }
         }
     }
@@ -231,13 +246,18 @@ class AndroidMediaPlayer(override var context: Context):
         mediaPlayer?.let {
             try {
                 if (isInPlayState()) {
-                    it.seekTo(pos * 1000)
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                        it.seekTo((pos * 1000).toLong(), MediaPlayer.SEEK_CLOSEST)
+                    } else {
+                        it.seekTo(pos * 1000)
+                    }
                     setPlayerState(PlayerState.SEEKING)
                 }
             } catch (e: Exception) {
+                LogUtil.e(TAG, "dealWithSeek Exception: e = ${e.message}")
                 e.printStackTrace()
                 reset()
-                TODO("用接口或者消息传递机制传递信息")
+                EventBus.getDefault().post(EventPlayerError(this, PlayerError.ERROR_SEEK_CRASH))
             }
         }
     }
@@ -250,9 +270,10 @@ class AndroidMediaPlayer(override var context: Context):
                     setPlayerState(PlayerState.STOPPED)
                 }
             } catch (e: Exception) {
+                LogUtil.e(TAG, "dealWithStop Exception: e = ${e.message}")
                 e.printStackTrace()
                 reset()
-                TODO("用接口或者消息传递机制传递信息")
+                EventBus.getDefault().post(EventPlayerError(this, PlayerError.ERROR_STOP_CRASH))
             }
         }
     }
@@ -270,14 +291,15 @@ class AndroidMediaPlayer(override var context: Context):
      * 视频缓冲进度，或者播放进度
      */
     override fun onBufferingUpdate(mp: MediaPlayer?, percent: Int) {
-        TODO("Not yet implemented")
+        // 暂不处理
+        LogUtil.i(TAG, "percent = $percent")
     }
 
     /**
      * 监听回调，调整播放位置是否完成
      */
     override fun onSeekComplete(mp: MediaPlayer?) {
-        start()
+        setPlayerState(PlayerState.PLAYING)
     }
 
     /**
@@ -291,15 +313,17 @@ class AndroidMediaPlayer(override var context: Context):
      * 监听回调，播放窗口大小改变
      */
     override fun onVideoSizeChanged(mp: MediaPlayer?, width: Int, height: Int) {
-        TODO("用接口或者消息传递机制传递信息")
+        LogUtil.i(TAG, "onVideoSizeChanged: width = $width, height = $height")
+        EventBus.getDefault().post(EventPlayerVideoSize(this, width, height))
     }
 
     /**
      * 监听回调，播放出错
      */
     override fun onError(mp: MediaPlayer?, what: Int, extra: Int): Boolean {
+        LogUtil.e(TAG, "onError: what = $what, extra = $extra")
         reset()
-        TODO("用接口或者消息传递机制传递信息")
+        EventBus.getDefault().post(EventPlayerError(this, what))
         return true
     }
 
@@ -308,7 +332,11 @@ class AndroidMediaPlayer(override var context: Context):
      */
     override fun onInfo(mp: MediaPlayer?, what: Int, extra: Int): Boolean {
         //暂不处理
+        LogUtil.w(TAG, "onInfo: what = $what, extra = $extra")
         return false
     }
 
+    companion object {
+        val TAG: String = AndroidMediaPlayer::class.java.simpleName
+    }
 }

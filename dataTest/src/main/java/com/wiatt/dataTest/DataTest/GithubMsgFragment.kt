@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.wiatt.dataTest.R
-import com.wiatt.dataTest.base.BaseFragment
+import com.wiatt.common.base.BaseFragment
 import com.wiatt.dataTest.data.GithubMsg
 
 

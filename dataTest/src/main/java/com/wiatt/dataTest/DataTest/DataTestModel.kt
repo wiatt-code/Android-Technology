@@ -3,7 +3,6 @@ package com.wiatt.dataTest.DataTest
 import android.os.Looper
 import android.os.Message
 import com.wiatt.common.AppExecutors
-import com.wiatt.common.LogTool
 import com.wiatt.common.WeakHandler
 import com.wiatt.common.mvp.BaseModel
 import com.wiatt.dataTest.data.*

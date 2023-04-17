@@ -11,7 +11,7 @@ import androidx.core.view.isInvisible
 import androidx.fragment.app.Fragment
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.wiatt.dataTest.R
-import com.wiatt.dataTest.base.BaseFragment
+import com.wiatt.common.base.BaseFragment
 import com.wiatt.common.mvp.BaseView
 import com.wiatt.dataTest.data.GithubMsg
 import com.wiatt.dataTest.data.Repo

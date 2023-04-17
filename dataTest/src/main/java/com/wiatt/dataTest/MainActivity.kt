@@ -9,7 +9,7 @@ import com.alibaba.android.arouter.facade.annotation.Route
 import com.wiatt.dataTest.DataTest.DataTestFragment
 import com.wiatt.dataTest.data.Repo
 import com.wiatt.dataTest.data.TestApi
-import com.wiatt.dataTest.base.BaseActivity
+import com.wiatt.common.base.BaseActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

@@ -1,28 +1,31 @@
-package com.wiatt.dataTest.base
+package com.wiatt.common.base
 
 import android.os.Bundle
-import android.os.PersistableBundle
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
-import com.wiatt.dataTest.R
+import org.greenrobot.eventbus.EventBus
 
-abstract class BaseActivity : AppCompatActivity() {
+abstract class BaseFragment: Fragment() {
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+    }
 
     /**
      * fragment的扩展函数，用于操作fragment
      */
-    inline fun FragmentManager.inTransaction(func: FragmentTransaction.() -> FragmentTransaction) {
+    private inline fun FragmentManager.inTransaction(func: FragmentTransaction.() -> FragmentTransaction) {
         beginTransaction().func().commit()
     }
 
     /**
      * 添加fragment
-     * FragmentActivity.addFragment 表示将addFragment是作为FragmentActivity的扩展函数存在
-     * 这样addFragment内部就能直接访问到FragmentActivity中的supportFragmentManager
      */
     fun FragmentActivity.addFragment(fragment: Fragment, frameId: Int){
         supportFragmentManager.inTransaction { add(frameId, fragment) }

@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.view.isInvisible
 import androidx.fragment.app.Fragment
 import com.alibaba.android.arouter.facade.annotation.Route
@@ -23,6 +24,7 @@ class DataTestFragment : BaseFragment(), BaseView<DataTestFragment, DataTestPres
     private lateinit var tvRFNResult: TextView
     private lateinit var btnRFN: Button
     private lateinit var btnGFD: Button
+    private lateinit var btnGFF: Button
     private lateinit var tvGFDResult: TextView
     private lateinit var flContainer: FrameLayout
     private lateinit var fGFDMsg: GithubMsgFragment
@@ -40,6 +42,7 @@ class DataTestFragment : BaseFragment(), BaseView<DataTestFragment, DataTestPres
         btnGFD = rootView.findViewById(R.id.btnGFD)
         tvGFDResult = rootView.findViewById(R.id.tvGFDResult)
         flContainer = rootView.findViewById(R.id.flContainer)
+        btnGFF = rootView.findViewById(R.id.btnGFF)
         fGFDMsg = GithubMsgFragment.newInstance()
         childFragmentManager.beginTransaction().add(R.id.flContainer, fGFDMsg).commit()
         childFragmentManager.beginTransaction().hide(fGFDMsg).commit()
@@ -49,6 +52,9 @@ class DataTestFragment : BaseFragment(), BaseView<DataTestFragment, DataTestPres
         }
         btnGFD.setOnClickListener {
             p.getContract().getRepoFromDatabase()
+        }
+        btnGFF.setOnClickListener {
+            Toast.makeText(context, "功能建设中", Toast.LENGTH_LONG).show()
         }
 
         return rootView

@@ -9,27 +9,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Manuscript">
-        <activity android:name=".position_and_size.PieActivity"/>
-        <activity android:name=".position_and_size.DashboardActivity" />
-        <activity android:name=".xfermode.XfermodeActivity"/>
-        <activity android:name=".xfermode.AvatarActivity"/>
-        <activity android:name=".word_measure.WordMeasureActivity"/>
-        <activity android:name=".word_measure.MultilineTextActivity"/>
-        <activity android:name=".clip_and_trans.ClipActivity"/>
-        <activity android:name=".clip_and_trans.TransActivity"/>
-        <activity android:name=".clip_and_trans.PageTurnActivity"/>
-        <activity android:name=".animation.AnimationActivity"/>
-        <activity android:name=".bitmap_drawable.BitmapDrawableActivity"/>
-        <activity android:name=".materialEditText.MaterialEditTextActivity"/>
-        <activity android:name=".customLayout.SquareImageActivity"/>
-        <activity android:name=".customLayout.CircleActivity"/>
-        <activity android:name=".customLayout.TagLayoutActivity"/>
-        <activity android:name=".customTouch.TouchActivity"/>
-        <activity android:name=".scalableImage.ScalableImageActivity"/>
-        <activity android:name=".multitouch.MultiTouchActivity2"/>
-        <activity android:name=".multitouch.MultiTouchActivity3"/>
-        <activity android:name=".customTouchViewGroup.CustomTouchViewGroupActivity"/>
-        <activity android:name=".CustomViewTouchDrag.CustomViewTouchDragActivity"/>
         <activity android:name=".MainActivity"/>
     </application>
 

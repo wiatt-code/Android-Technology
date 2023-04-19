@@ -73,11 +73,11 @@ class PageTurnView(context: Context, attrs: AttributeSet?)
     private fun getAvatar(width: Int): Bitmap {
         val options: BitmapFactory.Options =  BitmapFactory.Options()
         options.inJustDecodeBounds = true
-        BitmapFactory.decodeResource(resources, R.drawable.avatar_rengwuxian, options)
+        BitmapFactory.decodeResource(resources, R.mipmap.avatar_programmer, options)
         options.inJustDecodeBounds = false
         options.inDensity = options.outWidth
         options.inTargetDensity = width
-        return BitmapFactory.decodeResource(resources, R.drawable.avatar_rengwuxian, options)
+        return BitmapFactory.decodeResource(resources, R.mipmap.avatar_programmer, options)
     }
 }
 

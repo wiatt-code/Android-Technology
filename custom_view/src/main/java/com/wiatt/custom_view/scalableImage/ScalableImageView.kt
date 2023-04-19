@@ -46,6 +46,11 @@ class ScalableImageView(context: Context, attrs: AttributeSet?): View(context, a
     private val scaleAnimator: ObjectAnimator = ObjectAnimator.ofFloat(this, "currentScale", smallScale, bigScale)
     private val scroller = OverScroller(context)
 
+    override fun dispatchTouchEvent(event: MotionEvent?): Boolean {
+        parent.requestDisallowInterceptTouchEvent(true)
+        return super.dispatchTouchEvent(event)
+    }
+
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
         super.onSizeChanged(w, h, oldw, oldh)
         originalOffsetX = (w - bitmap.width) / 2f
@@ -80,11 +85,11 @@ class ScalableImageView(context: Context, attrs: AttributeSet?): View(context, a
     private fun getAvatar(width: Int): Bitmap {
         val options: BitmapFactory.Options = BitmapFactory.Options()
         options.inJustDecodeBounds = true
-        BitmapFactory.decodeResource(resources, R.drawable.avatar_rengwuxian, options)
+        BitmapFactory.decodeResource(resources, R.mipmap.avatar_programmer, options)
         options.inJustDecodeBounds = false
         options.inDensity = options.outWidth
         options.inTargetDensity = width
-        return BitmapFactory.decodeResource(resources, R.drawable.avatar_rengwuxian, options)
+        return BitmapFactory.decodeResource(resources, R.mipmap.avatar_programmer, options)
     }
 
     private fun fixOffsets() {

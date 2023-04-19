@@ -1,14 +1,34 @@
 package com.wiatt.custom_view
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearSnapHelper
+import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager2.widget.ViewPager2
 import com.alibaba.android.arouter.facade.annotation.Route
+import com.wiatt.common.base.BaseFragment
+import com.wiatt.custom_view.animation.AnimationFragment
+import com.wiatt.custom_view.customViewTouchDrag.ViewDragFragment
+import com.wiatt.custom_view.position_and_size.CusViewFragment
+import com.wiatt.custom_view.scalableImage.ScalableImageFragment
+import com.wiatt.custom_view.word_measure.WordFragment
+import java.lang.reflect.Field
+
 
 @Route(path = "/customView/CustomViewFragment")
-class CustomViewFragment : Fragment() {
+class CustomViewFragment : BaseFragment() {
+
+    lateinit var rvList: MyRecyclerView
+    lateinit var flContent: FrameLayout
+
+    private var currentFragment: Fragment? = null
+    private var infos: MutableList<ViewInfo> = mutableListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -19,8 +39,62 @@ class CustomViewFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_custom_view, container, false)
+        var rootView = inflater.inflate(R.layout.fragment_custom_view, container, false)
+        rvList = rootView.findViewById(R.id.rvList)
+        flContent = rootView.findViewById(R.id.flContent)
+        initData()
+        initView()
+        return rootView
+    }
+    private fun initData() {
+        infos.add(ViewInfo("自定义View", CusViewFragment.newInstance()))
+        infos.add(ViewInfo("文字", WordFragment.newInstance()))
+        infos.add(ViewInfo("动画", AnimationFragment.newInstance()))
+        infos.add(ViewInfo("拖拽", ViewDragFragment.newInstance()))
+        infos.add(ViewInfo("手势", ScalableImageFragment.newInstance()))
+    }
+
+    private fun initView() {
+        var adapter = ViewAdapter(context!!, infos)
+        var callback = CustomViewCallback()
+        adapter.callback = callback
+        var layoutManager = LinearLayoutManager(context)
+        layoutManager.orientation = LinearLayoutManager.HORIZONTAL
+        rvList.adapter = adapter
+        rvList.layoutManager = layoutManager
+        rvList.addItemDecoration(
+            DividerItemDecoration(context, layoutManager.orientation)
+        )
+
+        switchFragment(null)
+    }
+
+
+
+    private fun switchFragment(nextFragment: Fragment?) {
+        if(nextFragment == currentFragment) {
+            return
+        }
+
+        if (currentFragment != null && currentFragment!!.isAdded) {
+            activity?.hideFragment(currentFragment!!)
+        }
+
+        if (nextFragment != null) {
+            if (nextFragment.isAdded) {
+                activity?.showFragment(nextFragment)
+            } else {
+                activity?.addFragment(nextFragment, R.id.flContent)
+            }
+        }
+        currentFragment = nextFragment
+    }
+
+    inner class CustomViewCallback(): ViewAdapter.ViewAdapterCallback {
+        override fun onClickItem(info: ViewInfo) {
+            switchFragment(info.fragment)
+        }
+
     }
 
     companion object {

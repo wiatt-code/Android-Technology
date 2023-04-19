@@ -6,10 +6,13 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.alibaba.android.arouter.launcher.ARouter
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import java.lang.Exception
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -22,6 +25,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         tlNavigation = findViewById(R.id.tlNavigation)
         vpContent = findViewById(R.id.vpContent)
+        updateViewPage2Sensitivity(vpContent)
         initData()
         initPage()
         TabLayoutMediator(tlNavigation, vpContent) { tab, position ->
@@ -73,5 +77,29 @@ class MainActivity : AppCompatActivity() {
             fragments
         )
         vpContent.adapter = myFragmentPageAdapter
+    }
+
+    /**
+     * 更新viewPage的滑动灵敏度
+     */
+    private fun updateViewPage2Sensitivity(mViewPage: ViewPager2) {
+        try {
+            val recyclerViewField = ViewPager2::class.java.getDeclaredField("mRecyclerView")
+            recyclerViewField.isAccessible = true
+
+            val recyclerView = recyclerViewField[mViewPage] as RecyclerView
+
+            val touchSlopField = RecyclerView::class.java.getDeclaredField("mTouchSlop")
+            touchSlopField.isAccessible = true
+
+            val touchSlop = touchSlopField[recyclerView] as Int
+            touchSlopField[recyclerView] = touchSlop * 4 //6 is empirical value
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    companion object {
+        val TAG = MainActivity::class.java.simpleName
     }
 }

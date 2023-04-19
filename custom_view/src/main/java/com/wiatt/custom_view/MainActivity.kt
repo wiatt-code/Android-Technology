@@ -1,65 +1,55 @@
 package com.wiatt.custom_view
 
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
-import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import androidx.fragment.app.Fragment
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.wiatt.custom_view.animation.AnimationActivity
-import com.wiatt.custom_view.bitmap_drawable.BitmapDrawableActivity
-import com.wiatt.custom_view.clip_and_trans.ClipActivity
-import com.wiatt.custom_view.clip_and_trans.PageTurnActivity
-import com.wiatt.custom_view.clip_and_trans.TransActivity
-import com.wiatt.custom_view.customLayout.CircleActivity
-import com.wiatt.custom_view.customLayout.SquareImageActivity
-import com.wiatt.custom_view.materialEditText.MaterialEditTextActivity
-import com.wiatt.custom_view.position_and_size.DashboardActivity
-import com.wiatt.custom_view.position_and_size.PieActivity
-import com.wiatt.custom_view.word_measure.MultilineTextActivity
-import com.wiatt.custom_view.word_measure.WordMeasureActivity
-import com.wiatt.custom_view.xfermode.AvatarActivity
-import com.wiatt.custom_view.xfermode.XfermodeActivity
+import com.wiatt.common.base.BaseActivity
 
 @Route(path = "/customView/MainActivity")
-open class MainActivity : AppCompatActivity() {
+open class MainActivity : BaseActivity() {
 
-    private lateinit var rvEntrance: RecyclerView
-    private var infos = mutableListOf<EntranceInfo>()
-
-    private lateinit var context: Context
+    private var currentFragment: Fragment? = null
+    private var customViewFragment: CustomViewFragment = CustomViewFragment.newInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_customview_main)
-        println("1111, from custom view!!!")
+        switchFragment(customViewFragment)
+    }
 
-        context = this
-        rvEntrance = findViewById(R.id.rvEntrance)
-        initData()
-        var adapter = EntranceAdapter(this, infos)
-        var layoutManager = LinearLayoutManager(context)
-        rvEntrance.adapter = adapter
-        rvEntrance.layoutManager = layoutManager
+    private fun switchFragment(nextFragment: Fragment?) {
+        if(nextFragment == currentFragment) {
+            return
+        }
 
+        if (currentFragment != null && currentFragment!!.isAdded) {
+            hideFragment(currentFragment!!)
+        }
+
+        if (nextFragment != null) {
+            if (nextFragment.isAdded) {
+                showFragment(nextFragment)
+            } else {
+                addFragment(nextFragment, R.id.flViewContainer)
+            }
+        }
+        currentFragment = nextFragment
     }
 
     fun initData(){
-        infos.add(EntranceInfo("dashboard go", DashboardActivity()))
-        infos.add(EntranceInfo("pie go", PieActivity()))
-        infos.add(EntranceInfo("avatarView go", AvatarActivity()))
-        infos.add(EntranceInfo("xfermode go", XfermodeActivity()))
-        infos.add(EntranceInfo("word measure go", WordMeasureActivity()))
-        infos.add(EntranceInfo("Multiline text go", MultilineTextActivity()))
-        infos.add(EntranceInfo("trans go", TransActivity()))
-        infos.add(EntranceInfo("clip go", ClipActivity()))
-        infos.add(EntranceInfo("page turn go", PageTurnActivity()))
-        infos.add(EntranceInfo("animation go", AnimationActivity()))
-        infos.add(EntranceInfo("bitmap&drawable go", BitmapDrawableActivity()))
-        infos.add(EntranceInfo("materialEditText go", MaterialEditTextActivity()))
-        infos.add(EntranceInfo("squareImage go", SquareImageActivity()))
-        infos.add(EntranceInfo("circleView go", CircleActivity()))
+//        infos.add(ViewInfo("dashboard go", DashboardActivity()))
+//        infos.add(ViewInfo("pie go", PieActivity()))
+//        infos.add(ViewInfo("avatarView go", AvatarActivity()))
+//        infos.add(ViewInfo("xfermode go", XfermodeActivity()))
+//        infos.add(ViewInfo("word measure go", WordMeasureActivity()))
+//        infos.add(ViewInfo("Multiline text go", MultilineTextActivity()))
+//        infos.add(ViewInfo("trans go", TransActivity()))
+//        infos.add(ViewInfo("clip go", ClipActivity()))
+//        infos.add(ViewInfo("page turn go", PageTurnActivity()))
+//        infos.add(ViewInfo("animation go", AnimationActivity()))
+//        infos.add(ViewInfo("bitmap&drawable go", BitmapDrawableActivity()))
+//        infos.add(ViewInfo("materialEditText go", MaterialEditTextActivity()))
+//        infos.add(ViewInfo("squareImage go", SquareImageActivity()))
+//        infos.add(ViewInfo("circleView go", CircleActivity()))
     }
 }

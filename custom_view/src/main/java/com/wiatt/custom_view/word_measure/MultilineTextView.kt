@@ -10,13 +10,14 @@ import android.text.StaticLayout
 import android.text.TextPaint
 import android.util.AttributeSet
 import android.view.View
+import android.widget.ScrollView
 import com.wiatt.common.dp
 import com.wiatt.custom_view.R
 
 private val IMAGE_SIZE = 150.dp
 private val IMAGE_PADDING = 100.dp
 
-class MultilineTextView(context: Context, attrs: AttributeSet): View(context, attrs) {
+class MultilineTextView(context: Context, attrs: AttributeSet): ScrollView(context, attrs) {
 
     val text = "Lacinia quisque etiam, dictum curabitur, scelerisque tempor tortor ad dolor aliquam gravida. Hac ornare litora, lorem malesuada dictum commodo. Dui convallis pharetra tempor, velit ut laoreet, aliquamtorquent habitasse erat vehicula aliquam. Habitasse aenean class, dictumst laoreet, ut euismod sodales condimentum lectus. Lorem dapibus himenaeos, elit sapien nisl eu. Enim massa facilisis etiam, integer cubilia amet nam id. Leo posuere diam dictumst, quisque ultrices convallis, sagittis feugiat sed ut mi eleifend est class. Accumsan eget odio, curabitur vivamus nulla habitant.\n" +
             "\n" +
@@ -29,6 +30,10 @@ class MultilineTextView(context: Context, attrs: AttributeSet): View(context, at
     }
     private val bitmap = getAvatar(IMAGE_SIZE.toInt())
     private val fontMetrics = Paint.FontMetrics()
+
+    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec)
+    }
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
@@ -70,10 +75,10 @@ class MultilineTextView(context: Context, attrs: AttributeSet): View(context, at
     private fun getAvatar(width: Int): Bitmap {
         val options = BitmapFactory.Options()
         options.inJustDecodeBounds = true
-        BitmapFactory.decodeResource(resources, R.drawable.avatar_rengwuxian, options)
+        BitmapFactory.decodeResource(resources, R.mipmap.avatar_programmer, options)
         options.inJustDecodeBounds = false
         options.inDensity = options.outWidth
         options.inTargetDensity = width
-        return BitmapFactory.decodeResource(resources, R.drawable.avatar_rengwuxian, options)
+        return BitmapFactory.decodeResource(resources, R.mipmap.avatar_programmer, options)
     }
 }

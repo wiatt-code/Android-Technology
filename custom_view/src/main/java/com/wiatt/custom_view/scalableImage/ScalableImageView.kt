@@ -12,12 +12,12 @@ import android.view.MotionEvent
 import android.view.ScaleGestureDetector
 import android.view.View
 import android.widget.OverScroller
-import android.widget.Scroller
-import androidx.core.animation.doOnEnd
 import androidx.core.view.GestureDetectorCompat
 import androidx.core.view.ViewCompat
+import com.wiatt.common.LogUtil
 import com.wiatt.common.dp
 import com.wiatt.custom_view.R
+import java.math.BigDecimal
 
 private val IMAGE_SIZE = 300.dp.toInt()
 private const val EXTRA_SCALE_FACTOR = 1.5f
@@ -43,7 +43,8 @@ class ScalableImageView(context: Context, attrs: AttributeSet?): View(context, a
             field = value
             invalidate()
         }
-    private val scaleAnimator: ObjectAnimator = ObjectAnimator.ofFloat(this, "currentScale", smallScale, bigScale)
+    private val scaleBigAnimator: ObjectAnimator = ObjectAnimator.ofFloat(this, "currentScale", currentScale, bigScale)
+    private val scaleSmallAnimator: ObjectAnimator = ObjectAnimator.ofFloat(this, "currentScale", currentScale, smallScale)
     private val scroller = OverScroller(context)
 
     override fun dispatchTouchEvent(event: MotionEvent?): Boolean {
@@ -62,8 +63,10 @@ class ScalableImageView(context: Context, attrs: AttributeSet?): View(context, a
             smallScale = h / bitmap.height.toFloat()
             bigScale = w / bitmap.width.toFloat() * EXTRA_SCALE_FACTOR
         }
+        LogUtil.i(TAG, "onSizeChanged")
         currentScale = smallScale
-        scaleAnimator.setFloatValues(smallScale, bigScale)
+        scaleBigAnimator.setFloatValues(currentScale, bigScale)
+        scaleSmallAnimator.setFloatValues(currentScale, smallScale)
     }
 
 
@@ -153,9 +156,12 @@ class ScalableImageView(context: Context, attrs: AttributeSet?): View(context, a
                 offsetX = (e.x - width / 2f) * (1 - bigScale / smallScale)
                 offsetY = (e.y - height / 2) * (1- bigScale / smallScale - 1)
                 fixOffsets()
-                scaleAnimator.start()
+                scaleBigAnimator.start()
             } else {
-                scaleAnimator.reverse()
+                offsetX = originalOffsetX
+                offsetY = originalOffsetY
+                fixOffsets()
+                scaleSmallAnimator.start()
             }
             return true
         }
@@ -171,6 +177,12 @@ class ScalableImageView(context: Context, attrs: AttributeSet?): View(context, a
         }
 
         override fun onScaleEnd(detector: ScaleGestureDetector) {
+            val bigDecimal = BigDecimal(currentScale.toDouble())
+            val temCurScale: Float = bigDecimal.setScale(1, BigDecimal.ROUND_DOWN).toFloat()
+            LogUtil.i(TAG, "smallScale = $smallScale, bigScale = $bigScale, " +
+                    "currentScale = $currentScale, temCurScale = $temCurScale")
+            big = temCurScale > smallScale
+
         }
 
         override fun onScale(detector: ScaleGestureDetector): Boolean {
@@ -194,5 +206,9 @@ class ScalableImageView(context: Context, attrs: AttributeSet?): View(context, a
                 ViewCompat.postOnAnimation(this@ScalableImageView, this)
             }
         }
+    }
+
+    companion object {
+        val TAG = ScalableImageView::class.java.simpleName
     }
 }

@@ -1,6 +1,6 @@
 ext {
     // 表示是否为正式版本，即集成化环境
-    isRelease = false
+    isRelease = true
 
 
     // 建立 Map，以键值对形式存储版本信息变量

@@ -12,8 +12,6 @@ android {
     defaultConfig {
         minSdkVersion androidId.minSdkVersion
         targetSdkVersion androidId.targetSdkVersion
-        versionCode androidId.versionCode
-        versionName androidId.versionName
 
         consumerProguardFiles "consumer-rules.pro"
     }

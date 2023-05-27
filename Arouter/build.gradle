@@ -38,5 +38,9 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.core:core-ktx:1.2.0'
     implementation 'androidx.appcompat:appcompat:1.1.0'
+    // 屏幕适配第三方库
+    // 放在这里是因为Arouter模块之上的模块都可以被作为展示模块
+    // Arouter模块之下的模块，更多的都是功能支持模块
+    api 'me.jessyan:autosize:1.2.1'
     api 'com.alibaba:arouter-api:1.5.2'
 }

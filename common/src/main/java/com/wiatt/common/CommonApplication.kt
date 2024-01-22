@@ -8,8 +8,6 @@ open class CommonApplication: Application() {
         super.onCreate()
         mApplication = this
         LogUtil.init()
-
-
     }
 
     companion object {

@@ -14,4 +14,28 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+    
+    <style name="NormalDialogStyle">
+        <!-- 对话框背景 -->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <!-- 边框 -->
+        <item name="android:windowFrame">@null</item>
+        <!-- 标题 -->
+        <item name="windowNoTitle">true</item>
+        <!-- 是否浮现在activity之上 -->
+        <item name="android:windowIsFloating">true</item>
+        <!-- 背景透明 -->
+        <item name="android:windowIsTranslucent">false</item>
+        <!-- 是否覆盖 -->
+        <item name="android:windowContentOverlay">@null</item>
+        <!-- 进出场动画 -->
+        <item name="android:windowAnimationStyle">@style/normalDialogAnim</item>
+        <!-- 背景变暗 -->
+        <item name="android:backgroundDimEnabled">true</item>
+    </style>
+    
+    <style name="normalDialogAnim" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/normal_dialog_enter</item>
+        <item name="android:windowExitAnimation">@anim/normal_dialog_exit</item>
+    </style>
 </resources>

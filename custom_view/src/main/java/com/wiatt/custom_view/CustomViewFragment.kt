@@ -8,17 +8,14 @@ import android.widget.FrameLayout
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.LinearSnapHelper
-import androidx.recyclerview.widget.RecyclerView
-import androidx.viewpager2.widget.ViewPager2
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.wiatt.common.base.BaseFragment
 import com.wiatt.custom_view.animation.AnimationFragment
 import com.wiatt.custom_view.customViewTouchDrag.ViewDragFragment
+import com.wiatt.custom_view.dialog.DialogShowFragment
 import com.wiatt.custom_view.position_and_size.CusViewFragment
 import com.wiatt.custom_view.scalableImage.ScalableImageFragment
 import com.wiatt.custom_view.word_measure.WordFragment
-import java.lang.reflect.Field
 
 
 @Route(path = "/customView/CustomViewFragment")
@@ -39,7 +36,7 @@ class CustomViewFragment : BaseFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        var rootView = inflater.inflate(R.layout.fragment_custom_view, container, false)
+        val rootView = inflater.inflate(R.layout.fragment_custom_view, container, false)
         rvList = rootView.findViewById(R.id.rvList)
         flContent = rootView.findViewById(R.id.flContent)
         initData()
@@ -52,13 +49,14 @@ class CustomViewFragment : BaseFragment() {
         infos.add(ViewInfo("动画", AnimationFragment.newInstance()))
         infos.add(ViewInfo("拖拽", ViewDragFragment.newInstance()))
         infos.add(ViewInfo("手势", ScalableImageFragment.newInstance()))
+        infos.add(ViewInfo("弹框", DialogShowFragment.newInstance()))
     }
 
     private fun initView() {
-        var adapter = ViewAdapter(context!!, infos)
-        var callback = CustomViewCallback()
+        val adapter = ViewAdapter(context!!, infos)
+        val callback = CustomViewCallback()
         adapter.callback = callback
-        var layoutManager = LinearLayoutManager(context)
+        val layoutManager = LinearLayoutManager(context)
         layoutManager.orientation = LinearLayoutManager.HORIZONTAL
         rvList.adapter = adapter
         rvList.layoutManager = layoutManager

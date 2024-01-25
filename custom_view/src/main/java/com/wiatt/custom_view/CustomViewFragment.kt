@@ -50,10 +50,11 @@ class CustomViewFragment : BaseFragment() {
         infos.add(ViewInfo("拖拽", ViewDragFragment.newInstance()))
         infos.add(ViewInfo("手势", ScalableImageFragment.newInstance()))
         infos.add(ViewInfo("弹框", DialogShowFragment.newInstance()))
+        infos.add(ViewInfo("其他", OtherEnterFragment.newInstance()))
     }
 
     private fun initView() {
-        val adapter = ViewAdapter(context!!, infos)
+        val adapter = ViewAdapter(requireContext(), infos)
         val callback = CustomViewCallback()
         adapter.callback = callback
         val layoutManager = LinearLayoutManager(context)
@@ -75,14 +76,14 @@ class CustomViewFragment : BaseFragment() {
         }
 
         if (currentFragment != null && currentFragment!!.isAdded) {
-            activity?.hideFragment(currentFragment!!)
+            hideFragment(currentFragment!!)
         }
 
         if (nextFragment != null) {
             if (nextFragment.isAdded) {
-                activity?.showFragment(nextFragment)
+                showFragment(nextFragment)
             } else {
-                activity?.addFragment(nextFragment, R.id.flContent)
+                addFragment(nextFragment, R.id.flContent)
             }
         }
         currentFragment = nextFragment

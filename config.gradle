@@ -5,10 +5,10 @@ ext {
 
     // 建立 Map，以键值对形式存储版本信息变量
     androidId = [
-            compileSdkVersion: 30,
-            buildToolsVersion: "30.0.3",
+            compileSdkVersion: 33,
+            buildToolsVersion: "33.0.2",
             minSdkVersion    : 23,
-            targetSdkVersion : 30,
+            targetSdkVersion : 33,
             versionCode      : 1,
             versionName      : "1.0"
     ]
@@ -26,8 +26,8 @@ ext {
     dependencies = [
             "kotlin" : "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version",
             "core" : "androidx.core:core-ktx:1.2.0",
-            "appcompat" : "androidx.appcompat:appcompat:1.1.0",
-            "material" : "com.google.android.material:material:1.1.0",
+            "appcompat" : "androidx.appcompat:appcompat:1.6.0",
+            "material" : "com.google.android.material:material:1.5.0",
             "constraint" : "androidx.constraintlayout:constraintlayout:2.1.4",
             "recyclerview" : "androidx.recyclerview:recyclerview:1.2.1",
             // For control over item selection of both touch and mouse driven selection

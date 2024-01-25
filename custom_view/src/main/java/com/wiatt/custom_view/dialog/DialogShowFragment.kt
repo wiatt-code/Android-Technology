@@ -61,7 +61,7 @@ class DialogShowFragment private constructor(): Fragment(){
     }
 
     private fun initView() {
-        val adapter = DialogShowAdapter(context!!, infos)
+        val adapter = DialogShowAdapter(requireContext(), infos)
         val callback = DialogShowCallback()
         adapter.callback = callback
         val layoutManager = LinearLayoutManager(context)
@@ -77,7 +77,7 @@ class DialogShowFragment private constructor(): Fragment(){
      * 普通对话框
      */
     private fun showNormalDialog() {
-        var builder: AlertDialog.Builder = AlertDialog.Builder(context!!)
+        var builder: AlertDialog.Builder = AlertDialog.Builder(requireContext())
             .setIcon(R.mipmap.avatar_programmer)
             .setTitle("我是对话框")
             .setMessage("我是对话框的内容")
@@ -91,7 +91,7 @@ class DialogShowFragment private constructor(): Fragment(){
      */
     private fun showListDialog() {
         val strs = arrayOf("item_1", "item_2", "item_3", "item_4", "item_5")
-        var builder: AlertDialog.Builder = AlertDialog.Builder(context!!)
+        var builder: AlertDialog.Builder = AlertDialog.Builder(requireContext())
             .setIcon(R.mipmap.avatar_programmer)
             .setTitle("列表对话框")
             .setItems(strs
@@ -109,7 +109,7 @@ class DialogShowFragment private constructor(): Fragment(){
      */
     private fun showSingleChoiceDialog() {
         val strs = arrayOf("item_1", "item_2", "item_3", "item_4", "item_5")
-        var builder: AlertDialog.Builder = AlertDialog.Builder(context!!)
+        var builder: AlertDialog.Builder = AlertDialog.Builder(requireContext())
             .setIcon(R.mipmap.avatar_programmer)
             .setTitle("列表对话框")
             .setSingleChoiceItems(strs, 1
@@ -128,7 +128,7 @@ class DialogShowFragment private constructor(): Fragment(){
     private fun showMultiChoiceDialog() {
         val strs = arrayOf("item_1", "item_2", "item_3", "item_4", "item_5")
         val checks = booleanArrayOf(true, false, true, false, true)
-        var builder: AlertDialog.Builder = AlertDialog.Builder(context!!)
+        var builder: AlertDialog.Builder = AlertDialog.Builder(requireContext())
             .setIcon(R.mipmap.avatar_programmer)
             .setTitle("列表对话框")
             .setMultiChoiceItems(strs, checks
@@ -148,7 +148,7 @@ class DialogShowFragment private constructor(): Fragment(){
      * 不再建议使用
      */
     private fun showProgressDialog() {
-        var builder: AlertDialog.Builder = AlertDialog.Builder(context!!)
+        var builder: AlertDialog.Builder = AlertDialog.Builder(requireContext())
             .setIcon(R.mipmap.avatar_programmer)
             .setTitle("警告")
             .setMessage("进度条对话框不再建议使用，推荐替换为 dialog + progressbar，或者使用notifications通知进度")
@@ -163,7 +163,7 @@ class DialogShowFragment private constructor(): Fragment(){
     private fun showHalfCustomDialog() {
         val dialogView: View = layoutInflater.inflate(R.layout.dialog_half_custom, null)
         val etHalfDialog: EditText = dialogView.findViewById(R.id.etHalfDialog)
-        var builder: AlertDialog.Builder = AlertDialog.Builder(context!!)
+        var builder: AlertDialog.Builder = AlertDialog.Builder(requireContext())
             .setIcon(R.mipmap.avatar_programmer)
             .setTitle("半自定义对话框")
             .setView(dialogView)
@@ -175,15 +175,15 @@ class DialogShowFragment private constructor(): Fragment(){
      * 全自定义对话框
      */
     private fun showFullyCustomDialog() {
-        val dialog = Dialog(context!!, R.style.NormalDialogStyle)
+        val dialog = Dialog(requireContext(), R.style.NormalDialogStyle)
         val dialogView = layoutInflater.inflate(R.layout.dialog_fully_custom, null)
         val btnCancel: Button = dialogView.findViewById(R.id.btnCancel)
         dialog.setContentView(dialogView)
         dialog.setCanceledOnTouchOutside(true)
-        dialogView.minimumHeight = (ScreenSizeUtil.getScreenHeight(context!!) * 0.23f).toInt()
+        dialogView.minimumHeight = (ScreenSizeUtil.getScreenHeight(requireContext()) * 0.23f).toInt()
         val dialogWindow = dialog.window
         val lp: WindowManager.LayoutParams = dialogWindow!!.attributes
-        lp.width = ScreenSizeUtil.getScreenWidth(context!!)
+        lp.width = ScreenSizeUtil.getScreenWidth(requireContext())
         lp.height = WindowManager.LayoutParams.WRAP_CONTENT
         lp.gravity = Gravity.BOTTOM
         dialogWindow.attributes = lp
@@ -193,10 +193,10 @@ class DialogShowFragment private constructor(): Fragment(){
 
     private fun showPopupWindow() {
         val popupWindow = PopupWindow()
-        val view: View = LayoutInflater.from(context!!).inflate(R.layout.dialog_popupwindow, null)
+        val view: View = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_popupwindow, null)
         popupWindow.contentView = view
         popupWindow.width = WindowManager.LayoutParams.MATCH_PARENT
-        popupWindow.height = (ScreenSizeUtil.getScreenHeight(context!!) * 0.3f).toInt()
+        popupWindow.height = (ScreenSizeUtil.getScreenHeight(requireContext()) * 0.3f).toInt()
         popupWindow.setBackgroundDrawable(ColorDrawable(Color.WHITE))
         popupWindow.isOutsideTouchable = true
         popupWindow.isFocusable = true

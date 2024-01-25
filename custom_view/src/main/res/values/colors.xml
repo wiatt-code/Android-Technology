@@ -8,4 +8,10 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
+    <color name="black_363b41">#FF363B41</color>
+    <color name="black_1a1c22">#FF1A1C22</color>
+    <color name="balck_99000000">#99000000</color>
+
+    <color name="red_ff4b51">#FFFF4B51</color>
+
 </resources>

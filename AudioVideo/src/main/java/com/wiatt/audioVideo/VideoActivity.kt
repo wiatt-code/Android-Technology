@@ -5,6 +5,7 @@ import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.os.Looper
 import android.os.Message
+import android.os.PersistableBundle
 import android.view.GestureDetector
 import android.view.MotionEvent
 import android.view.SurfaceHolder
@@ -73,7 +74,7 @@ class VideoActivity: BaseActivity(), SurfaceHolder.Callback{
         isRestart = true
     }
 
-    override fun onSaveInstanceState(outState: Bundle) {
+    override fun onSaveInstanceState(outState: Bundle, outPersistentState: PersistableBundle) {
         super.onSaveInstanceState(outState)
         LogUtil.i(TAG, "onSaveInstanceState")
     }
@@ -125,7 +126,7 @@ class VideoActivity: BaseActivity(), SurfaceHolder.Callback{
         EventBus.getDefault().unregister(this)
     }
 
-    override fun onTouchEvent(event: MotionEvent?): Boolean {
+    override fun onTouchEvent(event: MotionEvent): Boolean {
         return gestureDetector.onTouchEvent(event)
     }
 
@@ -379,7 +380,7 @@ class VideoActivity: BaseActivity(), SurfaceHolder.Callback{
         /**
          * down事件，只有该事件返回true时，其他事件才能被监听
          */
-        override fun onDown(e: MotionEvent?): Boolean {
+        override fun onDown(e: MotionEvent): Boolean {
             LogUtil.d(TAG, "onDown")
             isFirstDown = true
             gestureType = GESTURE_TYPE_NORMAL
@@ -389,7 +390,7 @@ class VideoActivity: BaseActivity(), SurfaceHolder.Callback{
         /**
          * 单击事件（对双击事件做了兼容）
          */
-        override fun onSingleTapConfirmed(e: MotionEvent?): Boolean {
+        override fun onSingleTapConfirmed(e: MotionEvent): Boolean {
             if (videoControlFragment.isVisible) {
                 switchVideoControlFragment(isShow = false, isTiming = false)
             } else {
@@ -402,7 +403,7 @@ class VideoActivity: BaseActivity(), SurfaceHolder.Callback{
         /**
          * 双击事件
          */
-        override fun onDoubleTap(e: MotionEvent?): Boolean {
+        override fun onDoubleTap(e: MotionEvent): Boolean {
             switchVideoControlFragment(isShow = true, isTiming = true)
             setPlayOrPause()
             isFirstDown = false

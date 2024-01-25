@@ -2,10 +2,8 @@ package com.wiatt.common.base
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
-import org.greenrobot.eventbus.EventBus
 
 abstract class BaseFragment: Fragment() {
 
@@ -27,42 +25,42 @@ abstract class BaseFragment: Fragment() {
     /**
      * 添加fragment
      */
-    fun FragmentActivity.addFragment(fragment: Fragment, frameId: Int){
-        supportFragmentManager.inTransaction { add(frameId, fragment) }
+    fun addFragment(fragment: Fragment, frameId: Int){
+        childFragmentManager.inTransaction { add(frameId, fragment) }
     }
 
     /**
      * 移除fragment
      */
-    fun FragmentActivity.removeFragment(fragment: Fragment){
-        supportFragmentManager.inTransaction { remove(fragment) }
+    fun removeFragment(fragment: Fragment){
+        childFragmentManager.inTransaction { remove(fragment) }
     }
 
     /**
      * 展示fragment
      */
-    fun FragmentActivity.showFragment(fragment: Fragment) {
-        supportFragmentManager.inTransaction{show(fragment)}
+    fun showFragment(fragment: Fragment) {
+        childFragmentManager.inTransaction{show(fragment)}
     }
 
     /**
      * 隐藏fragment
      */
-    fun FragmentActivity.hideFragment(fragment: Fragment){
-        supportFragmentManager.inTransaction { hide(fragment) }
+    fun hideFragment(fragment: Fragment){
+        childFragmentManager.inTransaction { hide(fragment) }
     }
 
     /**
      * 连接fragment
      */
-    fun FragmentActivity.attachFragment(fragment: Fragment) {
-        supportFragmentManager.inTransaction{attach(fragment)}
+    fun attachFragment(fragment: Fragment) {
+        childFragmentManager.inTransaction{attach(fragment)}
     }
 
     /**
      * 分离fragment
      */
-    fun FragmentActivity.detachFragment(fragment: Fragment) {
-        supportFragmentManager.inTransaction{detach(fragment)}
+    fun detachFragment(fragment: Fragment) {
+        childFragmentManager.inTransaction{detach(fragment)}
     }
 }

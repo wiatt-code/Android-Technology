@@ -70,7 +70,7 @@ class ScalableImageView(context: Context, attrs: AttributeSet?): View(context, a
     }
 
 
-    override fun onTouchEvent(event: MotionEvent?): Boolean {
+    override fun onTouchEvent(event: MotionEvent): Boolean {
         scaleGestureDetector.onTouchEvent(event)
         if (!scaleGestureDetector.isInProgress) {
             gestureDetector.onTouchEvent(event)
@@ -104,13 +104,13 @@ class ScalableImageView(context: Context, attrs: AttributeSet?): View(context, a
 
     inner class MyGestureListener: GestureDetector.SimpleOnGestureListener() {
 
-        override fun onDown(e: MotionEvent?): Boolean {
+        override fun onDown(e: MotionEvent): Boolean {
             return true
         }
 
         override fun onFling(
-                e1: MotionEvent?,
-                e2: MotionEvent?,
+                e1: MotionEvent,
+                e2: MotionEvent,
                 velocityX: Float,
                 velocityY: Float
         ): Boolean {
@@ -134,8 +134,8 @@ class ScalableImageView(context: Context, attrs: AttributeSet?): View(context, a
         }
 
         override fun onScroll(
-                e1: MotionEvent?,
-                e2: MotionEvent?,
+                e1: MotionEvent,
+                e2: MotionEvent,
                 distanceX: Float,
                 distanceY: Float
         ): Boolean {
